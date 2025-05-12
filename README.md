@@ -20,10 +20,6 @@ Simply clone this repository or copy the script to your local system and give it
 
 chmod +x easy-rdp.sh
 
-## Usage
-
- ./rdp-u <username> -p <password> -r <resolution> <host>:<port>
-
 ### Parameters
 Option	Description
 
