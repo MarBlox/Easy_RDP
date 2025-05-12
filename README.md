@@ -24,7 +24,7 @@ chmod +x easy-rdp.sh
 
 ./rdp-u <username> -p <password> -r <resolution> <host>:<port>
 
-# Parameters
+### Parameters
 Option	Description
 
 -u	Username for RDP authentication
@@ -55,4 +55,4 @@ This project is provided "as is" without warranty. You are free to modify and di
 
 Developed by a Linux enthusiast aiming to streamline remote desktop connections for advanced users.
 
-## MB&D
+#### MB&D
