@@ -75,7 +75,6 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ -z "$HOST" ]]; then
-    print_banner
     echo "Error: Host not specified."
     show_help
 fi
