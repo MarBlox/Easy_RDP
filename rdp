@@ -42,7 +42,7 @@ show_help() {
     echo -e "  -p    Password"
     echo -e "  -r    Window resolution (e.g., 1280x720)"
     echo -e "  -h    Show this help message\n"
-    echo -e "Example:\n  rdp -u <username> -p <password> -r <resolution> <host>\n"
+    echo -e "Example:\n  rdp -u <username> -p <password> -r <resolution> <host>:<port>\n"
     exit 1
 }
 
