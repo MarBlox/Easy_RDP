@@ -22,7 +22,7 @@ chmod +x easy-rdp.sh
 
 ## Usage
 
-./rdp-u <username> -p <password> -r <resolution> <host>:<port>
+ ./rdp-u <username> -p <password> -r <resolution> <host>:<port>
 
 ### Parameters
 Option	Description
