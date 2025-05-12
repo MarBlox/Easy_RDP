@@ -26,9 +26,13 @@ chmod +x easy-rdp.sh
 
 # Parameters
 Option	Description
+
 -u	Username for RDP authentication
+
 -p	Password for RDP authentication
+
 -r	Custom resolution (e.g., 1280x720)
+
 -h	Display help information
 
 ## Example
