@@ -1,5 +1,11 @@
 #!/bin/bash
 
+USERNAME=""
+PASSWORD=""
+DEFAULT_RESOLUTION="1900x1000"
+HOST=""
+CUSTOM_RESOLUTION=""
+
 cols=$(tput cols)
 
 banner=(
@@ -19,36 +25,71 @@ banner=(
 
 separator=$(printf '=%.0s' $(seq 1 $cols))
 
-created() (
+print_banner() {
     echo "$separator"
-
     for line in "${banner[@]}"; do
         padding=$(( (cols - ${#line}) / 2 ))
         printf "%*s%s\n" "$padding" "" "$line"
     done
-
     echo "$separator"
-)
+}
 
+show_help() {
+    print_banner
+    echo -e "This script is designed to simplify the usage of the rdesktop command with customizable parameters."
+    echo -e "\nAvailable options:"
+    echo -e "  -u    Username"
+    echo -e "  -p    Password"
+    echo -e "  -r    Window resolution (e.g., 1280x720)"
+    echo -e "  -h    Show this help message\n"
+    echo -e "Example:\n  rdp -u <username> -p <password> -r <resolution> <host>\n"
+    exit 1
+}
 
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -u)
+            USERNAME="$2"
+            shift 2
+            ;;
+        -p)
+            PASSWORD="$2"
+            shift 2
+            ;;
+        -r)
+            CUSTOM_RESOLUTION="$2"
+            shift 2
+            ;;
+        -h)
+            show_help
+            ;;
+        -*)
+            echo "Unknown option: $1"
+            show_help
+            ;;
+        *)
+            HOST="$1"
+            shift
+            ;;
+    esac
+done
 
-help () (
-    created
-    echo -e "This script are used for helping in rdesktop command"
-    echo -e " -u - User Login\n -p - Password\n -r - Window Scale\n -h - Help"
-    echo -e "Exemple:\n rdp -u user -p password 127.0.0.1:3389"
-)
-
-if [[ "$1" == "-u" && "$3" == "-p" && "$5" == "-r" && -n "$7" ]]; then
-    created
-    rdesktop -g $6 -P -z -x l -u "$2" -p "$4" "$7"
-elif [[ "$1" == "-u" && "$3" == "-p" && -n "$5" ]]; then
-    created
-    rdesktop -g 1900x1000 -P -z -x l -u "$2" -p "$4" "$5"
-elif [[ "$1" == "-u" && -n "$3" ]]; then
-    created
-    rdesktop -g 1900x1000 -P -z -x l -u "$2" "$3"
-else 
-    help
+if [[ -z "$HOST" ]]; then
+    print_banner
+    echo "Error: Host not specified."
+    show_help
 fi
 
+if [[ -n "$CUSTOM_RESOLUTION" ]]; then
+    DEFAULT_RESOLUTION="$CUSTOM_RESOLUTION"
+fi
+
+CMD="rdesktop -g \"$DEFAULT_RESOLUTION\" -P -z -x l"
+
+[[ -n "$USERNAME" ]] && CMD+=" -u \"$USERNAME\""
+[[ -n "$PASSWORD" ]] && CMD+=" -p \"$PASSWORD\""
+
+CMD+=" \"$HOST\""
+
+print_banner
+eval "$CMD"
