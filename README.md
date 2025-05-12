@@ -18,7 +18,7 @@ Easy RDP is a Bash-based utility designed to simplify the usage of the `rdesktop
 
 Simply clone this repository or copy the script to your local system and give it execution permissions:
 
-`chmod +x rdp`
+`chmod +x rdp.sh`
 
 ### Parameters
 Option	Description
@@ -33,7 +33,7 @@ Option	Description
 
 ## Example
 
-`./rdp -u admin -p secret123 -r 1366x768 192.168.1.100:3389`
+`./rdp.sh -u admin -p secret123 -r 1366x768 192.168.1.100:3389`
 
 Note: If no resolution is provided, the script defaults to 1900x1000.
 
@@ -41,7 +41,7 @@ Note: If no resolution is provided, the script defaults to 1900x1000.
 
 To display the help instructions, run:
 
-`./rdp -h`
+`./rdp.sh -h`
 
 ## License
 
